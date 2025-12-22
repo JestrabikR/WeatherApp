@@ -1,6 +1,9 @@
 package com.jestrabikr.weather.ui.home
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -22,21 +25,39 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel<HomeViewModel>()) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            OutlinedTextField(
-                value = state.city,
-                onValueChange = viewModel::onCityChange,
-                label = { Text("City") },
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            Button(
-                onClick = viewModel::onSearchClick,
-                modifier = Modifier.fillMaxWidth(),
-                enabled = !state.isLoading
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text("Search")
+                OutlinedTextField(
+                    value = state.city,
+                    onValueChange = viewModel::onCityChange,
+                    label = { Text("City") },
+                    singleLine = true,
+                    modifier = Modifier
+                        .weight(1f)
+                )
+
+                Button(
+                    onClick = viewModel::onSearchClick,
+                    enabled = !state.isLoading,
+                    shape = CircleShape,
+                    contentPadding = PaddingValues(0.dp),
+                    modifier = Modifier
+                        .height(58.dp)
+                        .width(54.dp)
+                        .padding(top = 6.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = "Search"
+                    )
+                }
             }
+
 
             HorizontalDivider()
 
