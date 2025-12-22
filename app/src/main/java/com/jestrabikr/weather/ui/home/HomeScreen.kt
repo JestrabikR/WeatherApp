@@ -35,13 +35,34 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel<HomeViewModel>()) {
                 modifier = Modifier.fillMaxWidth(),
                 enabled = !state.isLoading
             ) {
-                Text("Display weather")
+                Text("Search")
             }
 
+            HorizontalDivider()
 
-            //TODO: loading
+            when {
+                state.isLoading -> {
+                    CircularProgressIndicator()
+                }
 
-            //TODO: error display
+                state.error != null -> {
+                    Text(
+                        text = state.error!!,
+                        color = MaterialTheme.colorScheme.error
+                    )
+                }
+
+                state.temperature != null -> {
+                    Text(
+                        text = "${state.temperature} °C - ${state.description}",
+                        style = MaterialTheme.typography.headlineMedium
+                    )
+                }
+
+                else -> {
+                    Text("Seach city to display temperature")
+                }
+            }
         }
     }
 }
