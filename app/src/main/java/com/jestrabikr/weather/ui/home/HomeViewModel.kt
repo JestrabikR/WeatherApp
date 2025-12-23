@@ -1,6 +1,5 @@
 package com.jestrabikr.weather.ui.home
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jestrabikr.weather.data.remote.ApiWeatherDataSource
@@ -44,11 +43,11 @@ class HomeViewModel(
                     it.copy(
                         isLoading = false,
                         temperature = result.temperature,
-                        description = result.description
+                        description = result.description,
+                        weatherIcon = result.icon
                     )
                 }
             } catch (e: Exception) {
-                Log.d("************ERROR", "$e")
                 //TODO: load from cache (db)
 
                 _uiState.update {

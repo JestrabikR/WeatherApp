@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.AsyncImage
 
 @Composable
 fun HomeScreen(viewModel: HomeViewModel = viewModel<HomeViewModel>()) {
@@ -74,10 +75,27 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel<HomeViewModel>()) {
                 }
 
                 state.temperature != null -> {
+                    val iconUrl = "https://openweathermap.org/img/wn/${state.weatherIcon}@2x.png"
+
+                    if (state.weatherIcon != null) {
+                        AsyncImage(
+                            model = iconUrl,
+                            contentDescription = state.description,
+                            modifier = Modifier.size(108.dp)
+                        )
+                    }
+
                     Text(
-                        text = "${state.temperature} °C - ${state.description}",
-                        style = MaterialTheme.typography.headlineMedium
+                        text = "${state.temperature} °C",
+                        style = MaterialTheme.typography.headlineLarge
                     )
+
+                    if (state.description != null) {
+                        Text(
+                            text = "${state.description}",
+                            style = MaterialTheme.typography.headlineSmall
+                        )
+                    }
                 }
 
                 else -> {

@@ -11,7 +11,8 @@ class ApiWeatherDataSource(
 
         return WeatherDto(
             temperature = response.main.temp,
-            description = response.weather.firstOrNull()?.description ?: ""
+            description = response.weather.firstOrNull()?.description ?: "",
+            icon = response.icon
         )
     }
 

@@ -4,7 +4,8 @@ class FakeWeatherDataSource : WeatherDataSource {
     override suspend fun getWeather(city: String): WeatherDto {
         return WeatherDto(
             temperature = 22.5,
-            description = "Cloudy"
+            description = "Cloudy",
+            icon = "02d"
         )
     }
 }

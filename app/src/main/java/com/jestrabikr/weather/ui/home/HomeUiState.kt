@@ -5,5 +5,6 @@ data class HomeUiState(
     val isLoading: Boolean = false,
     val error: String? = null,
     val temperature: Double? = null,
-    val description: String? = null
+    val description: String? = null,
+    val weatherIcon: String? = null
 )
