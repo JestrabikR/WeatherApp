@@ -16,6 +16,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val apiKey: String? = project.findProperty("OPENWEATHER_API_KEY") as String?
+
+        buildConfigField("String", "OPENWEATHER_API_KEY", "\"${apiKey}\"")
     }
 
     buildTypes {
@@ -36,6 +40,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -58,6 +63,8 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     implementation(libs.lifecycle.viewmodel.compose)
     implementation(libs.retrofit)
-    implementation(libs.moshi)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.gson)
     implementation(libs.okhttp)
+    implementation(libs.okhttp.logging)
 }
