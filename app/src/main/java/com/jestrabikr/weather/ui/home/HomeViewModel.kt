@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
 
 class HomeViewModel(
     private val repository: WeatherRepository = WeatherRepositoryImpl(
@@ -42,7 +43,7 @@ class HomeViewModel(
                 _uiState.update {
                     it.copy(
                         isLoading = false,
-                        temperature = result.temperature,
+                        temperature = result.temperature.roundToInt().toDouble(),
                         description = result.description,
                         weatherIcon = result.icon
                     )
