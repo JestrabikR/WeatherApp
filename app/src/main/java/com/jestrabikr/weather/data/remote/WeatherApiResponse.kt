@@ -3,7 +3,6 @@ package com.jestrabikr.weather.data.remote
 data class WeatherApiResponse(
     val main: Main,
     val weather: List<WeatherDescription>,
-    val icon: String
 )
 
 data class Main(
@@ -11,5 +10,6 @@ data class Main(
 )
 
 data class WeatherDescription(
-    val description: String
+    val description: String,
+    val icon: String
 )
