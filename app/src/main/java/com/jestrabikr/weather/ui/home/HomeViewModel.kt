@@ -1,8 +1,10 @@
 package com.jestrabikr.weather.ui.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jestrabikr.weather.data.remote.FakeWeatherDataSource
+import com.jestrabikr.weather.data.remote.ApiWeatherDataSource
+import com.jestrabikr.weather.data.remote.RetrofitInstance
 import com.jestrabikr.weather.data.repository.WeatherRepository
 import com.jestrabikr.weather.data.repository.WeatherRepositoryImpl
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,7 +13,9 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
-    private val repository: WeatherRepository = WeatherRepositoryImpl(FakeWeatherDataSource())
+    private val repository: WeatherRepository = WeatherRepositoryImpl(
+        ApiWeatherDataSource(RetrofitInstance.api)
+    )
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState: StateFlow<HomeUiState> = _uiState
@@ -44,7 +48,7 @@ class HomeViewModel(
                     )
                 }
             } catch (e: Exception) {
-
+                Log.d("************ERROR", "$e")
                 //TODO: load from cache (db)
 
                 _uiState.update {
