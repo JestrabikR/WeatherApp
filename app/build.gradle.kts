@@ -17,9 +17,14 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        val apiKey: String? = project.findProperty("OPENWEATHER_API_KEY") as String?
+        //TODO: CREATE API KEY IN gradle.properties
+        val apiKey = providers.gradleProperty("OPENWEATHER_API_KEY").getOrElse("")
 
-        buildConfigField("String", "OPENWEATHER_API_KEY", "\"${apiKey}\"")
+        buildConfigField(
+            "String",
+            "OPENWEATHER_API_KEY",
+            "\"$apiKey\""
+        )
     }
 
     buildTypes {
