@@ -3,9 +3,37 @@ package com.jestrabikr.weather.data.remote
 class FakeWeatherDataSource : WeatherDataSource {
     override suspend fun getWeather(city: String): WeatherDto {
         return WeatherDto(
-            temperature = 22.5,
-            description = "Cloudy",
-            icon = "02d"
+            visibility = 10000,
+
+            weather = WeatherDescriptionDto(
+                main = "Clouds",
+                description = "Overcast clouds",
+                icon = "04d"
+            ),
+
+            main = MainDto(
+                temperature = 22.5,
+                feelsLike = 21.8,
+                tempMin = 20.0,
+                tempMax = 24.0,
+                pressure = 1018,
+                humidity = 65
+            ),
+
+            wind = WindDto(
+                speed = 3.5,
+                deg = 220,
+                gust = 5.0
+            ),
+
+            clouds = CloudsDto(
+                all = 90
+            ),
+
+            sys = SunDto(
+                sunrise = 1766731424,
+                sunset = 1766761086
+            )
         )
     }
 }

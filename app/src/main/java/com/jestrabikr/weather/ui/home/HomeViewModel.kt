@@ -43,9 +43,9 @@ class HomeViewModel(
                 _uiState.update {
                     it.copy(
                         isLoading = false,
-                        temperature = result.temperature.roundToInt().toDouble(),
-                        description = result.description,
-                        weatherIcon = result.icon
+                        temperature = result.main.temperature.roundToInt().toDouble(),
+                        description = result.weather.main,
+                        weatherIcon = result.weather.icon
                     )
                 }
             } catch (e: Exception) {

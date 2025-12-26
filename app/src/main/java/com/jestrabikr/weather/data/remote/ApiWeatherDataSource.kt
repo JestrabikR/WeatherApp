@@ -1,5 +1,6 @@
 package com.jestrabikr.weather.data.remote
 import com.jestrabikr.weather.BuildConfig
+import com.jestrabikr.weather.data.mappers.toDto
 
 class ApiWeatherDataSource(
     private val apiService: WeatherApiService,
@@ -9,11 +10,7 @@ class ApiWeatherDataSource(
 
         val response = apiService.getWeather(city, apiKey)
 
-        return WeatherDto(
-            temperature = response.main.temp,
-            description = response.weather.firstOrNull()?.description ?: "",
-            icon = response.weather.firstOrNull()?.icon
-        )
+        return response.toDto()
     }
 
 }
