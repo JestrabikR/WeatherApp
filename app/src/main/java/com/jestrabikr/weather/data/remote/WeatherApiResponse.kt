@@ -7,7 +7,6 @@ data class WeatherApiResponse(
     val weather: List<WeatherDescription>,
     val main: Main,
     val wind: Wind,
-    val clouds: Clouds,
     val visibility: Int,
     val sys: Sys,
     val dt: Long
@@ -33,12 +32,7 @@ data class WeatherDescription(
 
 data class Wind(
     val speed: Double,
-    val deg: Int,
     val gust: Double?
-)
-
-data class Clouds(
-    val all: Int
 )
 
 data class Sys(

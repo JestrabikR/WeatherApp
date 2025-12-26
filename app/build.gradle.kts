@@ -74,4 +74,5 @@ dependencies {
     implementation(libs.okhttp.logging)
     implementation(libs.coil)
     implementation(libs.splashscreen)
+    implementation(libs.navigation)
 }

@@ -4,7 +4,6 @@ data class WeatherDto(
     val main: MainDto,
     val visibility: Int,
     val wind: WindDto,
-    val clouds: CloudsDto,
     val sys: SunDto,
 )
 
@@ -25,12 +24,7 @@ data class MainDto(
 
 data class WindDto(
     val speed: Double,
-    val deg: Int,
     val gust: Double?
-)
-
-data class CloudsDto(
-    val all: Int
 )
 
 data class SunDto(

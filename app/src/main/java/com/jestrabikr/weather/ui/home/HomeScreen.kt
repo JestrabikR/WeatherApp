@@ -10,121 +10,115 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import java.net.URLEncoder
 
 @Composable
-fun HomeScreen(viewModel: HomeViewModel = viewModel<HomeViewModel>()) {
+fun HomeScreen(navController: NavController, viewModel: HomeViewModel = viewModel<HomeViewModel>()) {
     val state by viewModel.uiState.collectAsState()
 
     Scaffold { padding ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    Brush.verticalGradient(
-                    colors = listOf(
-                        Color(0xFFfef7e8),
-                        Color(0xFFe8e2cc)
-                    )
-                ))
-                .padding(padding)
-        ) {
-            Column(
+        Column(
                 modifier = Modifier
                     .padding(padding)
                     .padding(16.dp)
                     .fillMaxSize(),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-
-                Row(
+                OutlinedTextField(
+                    value = state.city,
+                    onValueChange = viewModel::onCityChange,
+                    label = { Text("City") },
+                    singleLine = true,
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    OutlinedTextField(
-                        value = state.city,
-                        onValueChange = viewModel::onCityChange,
-                        label = { Text("City") },
-                        singleLine = true,
-                        modifier = Modifier
-                            .weight(1f)
-                    )
+                        .weight(1f)
+                )
 
-                    Button(
-                        onClick = viewModel::onSearchClick,
-                        enabled = !state.isLoading,
-                        shape = CircleShape,
-                        contentPadding = PaddingValues(0.dp),
-                        modifier = Modifier
-                            .height(58.dp)
-                            .width(54.dp)
-                            .padding(top = 6.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Search,
-                            contentDescription = "Search"
-                        )
-                    }
+                Button(
+                    onClick = viewModel::onSearchClick,
+                    enabled = !state.isLoading,
+                    shape = CircleShape,
+                    contentPadding = PaddingValues(0.dp),
+                    modifier = Modifier
+                        .height(58.dp)
+                        .width(54.dp)
+                        .padding(top = 6.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = "Search"
+                    )
+                }
+            }
+
+
+            HorizontalDivider()
+
+            when {
+                state.isLoading -> {
+                    CircularProgressIndicator()
                 }
 
+                state.error != null -> {
+                    Text(
+                        text = state.error!!,
+                        color = MaterialTheme.colorScheme.error
+                    )
+                }
 
-                HorizontalDivider()
+                state.temperature != null -> {
+                    val iconUrl = "https://openweathermap.org/img/wn/${state.weatherIcon}@2x.png"
 
-                when {
-                    state.isLoading -> {
-                        CircularProgressIndicator()
-                    }
-
-                    state.error != null -> {
-                        Text(
-                            text = state.error!!,
-                            color = MaterialTheme.colorScheme.error
-                        )
-                    }
-
-                    state.temperature != null -> {
-                        val iconUrl = "https://openweathermap.org/img/wn/${state.weatherIcon}@2x.png"
-
-                        if (state.weatherIcon != null) {
-                            Box(
-                                modifier = Modifier
-                                    .size(120.dp)
-                                    .shadow(16.dp, CircleShape)
-                                    .background(MaterialTheme.colorScheme.surface, CircleShape),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                AsyncImage(
-                                    model = iconUrl,
-                                    contentDescription = state.description,
-                                    modifier = Modifier.size(108.dp)
-                                )
-                            }
-                        }
-
-                        Text(
-                            text = "${state.temperature} °C",
-                            style = MaterialTheme.typography.headlineLarge
-                        )
-
-                        if (state.description != null) {
-                            Text(
-                                text = "${state.description}",
-                                style = MaterialTheme.typography.headlineSmall
+                    if (state.weatherIcon != null) {
+                        Box(
+                            modifier = Modifier
+                                .size(120.dp)
+                                .shadow(16.dp, CircleShape)
+                                .background(MaterialTheme.colorScheme.surface, CircleShape),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            AsyncImage(
+                                model = iconUrl,
+                                contentDescription = state.description,
+                                modifier = Modifier.size(108.dp)
                             )
                         }
                     }
 
-                    else -> {
-                        Text("Seach city to display temperature")
+                    Text(
+                        text = "${state.temperature} °C",
+                        style = MaterialTheme.typography.headlineLarge
+                    )
+
+                    if (state.description != null) {
+                        Text(
+                            text = "${state.description}",
+                            style = MaterialTheme.typography.headlineSmall
+                        )
                     }
+
+                    Button(onClick = {
+                        val encodedCity = URLEncoder.encode(state.city, "UTF-8")
+                        navController.navigate("detail/$encodedCity")
+                    }) {
+                        Text("Go to detail")
+                    }
+                }
+
+                else -> {
+                    Text("Seach city to display temperature")
                 }
             }
         }

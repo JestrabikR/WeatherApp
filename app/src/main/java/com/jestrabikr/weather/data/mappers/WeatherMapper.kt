@@ -1,6 +1,5 @@
 package com.jestrabikr.weather.data.mappers
 
-import com.jestrabikr.weather.data.remote.CloudsDto
 import com.jestrabikr.weather.data.remote.MainDto
 import com.jestrabikr.weather.data.remote.SunDto
 import com.jestrabikr.weather.data.remote.WeatherApiResponse
@@ -26,11 +25,7 @@ fun WeatherApiResponse.toDto(): WeatherDto =
         visibility = visibility,
         wind = WindDto(
             speed = wind.speed,
-            deg = wind.deg,
             gust = wind.gust
-        ),
-        clouds = CloudsDto(
-            all = clouds.all
         ),
         sys = SunDto(
             sunrise = sys.sunrise,
