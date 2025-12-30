@@ -68,8 +68,6 @@ class DetailViewModel(
                     )
                 }
             } catch (e: Exception) {
-                //TODO: load from cache (db)
-
                 _uiState.update {
                     it.copy(
                         isLoading = false,

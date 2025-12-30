@@ -9,6 +9,7 @@ import com.jestrabikr.weather.data.remote.WindDto
 
 fun WeatherApiResponse.toDto(): WeatherDto =
     WeatherDto(
+        name = name,
         weather = WeatherDescriptionDto(
             main = weather.firstOrNull()?.main ?: "",
             description =  weather.firstOrNull()?.description ?: "",

@@ -9,4 +9,8 @@ class WeatherRepositoryImpl(
     override suspend fun getWeather(city: String): WeatherDto {
         return dataSource.getWeather(city)
     }
+
+    override suspend fun getWeather(lat: Double, lon: Double): WeatherDto {
+        return dataSource.getWeather(lat, lon)
+    }
 }

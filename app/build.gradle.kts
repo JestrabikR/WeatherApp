@@ -75,4 +75,5 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.splashscreen)
     implementation(libs.navigation)
+    implementation(libs.location)
 }

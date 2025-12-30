@@ -13,4 +13,12 @@ class ApiWeatherDataSource(
         return response.toDto()
     }
 
+    override suspend fun getWeather(lat: Double, lon: Double): WeatherDto {
+        val apiKey = BuildConfig.OPENWEATHER_API_KEY
+
+        val response = apiService.getWeather(lat, lon, apiKey)
+
+        return response.toDto()
+    }
+
 }

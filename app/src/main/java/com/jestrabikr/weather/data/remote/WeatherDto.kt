@@ -1,5 +1,6 @@
 package com.jestrabikr.weather.data.remote
 data class WeatherDto(
+    val name: String,
     val weather: WeatherDescriptionDto,
     val main: MainDto,
     val visibility: Int,

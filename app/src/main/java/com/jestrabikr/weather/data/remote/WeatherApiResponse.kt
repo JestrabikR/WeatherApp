@@ -9,7 +9,7 @@ data class WeatherApiResponse(
     val wind: Wind,
     val visibility: Int,
     val sys: Sys,
-    val dt: Long
+    val dt: Long,
 )
 
 data class Main(
