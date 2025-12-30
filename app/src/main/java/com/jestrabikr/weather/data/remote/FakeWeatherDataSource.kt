@@ -22,7 +22,6 @@ class FakeWeatherDataSource : WeatherDataSource {
 
             wind = WindDto(
                 speed = 3.5,
-                gust = 5.0
             ),
 
             sys = SunDto(

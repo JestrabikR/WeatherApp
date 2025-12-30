@@ -18,7 +18,6 @@ data class DetailUiState(
     val humidity: Int? = null,
 
     val windSpeed: Int? = null,
-    val windGust: Int? = null,
 
     val visibility: Int? = null,
 

@@ -2,7 +2,9 @@ package com.jestrabikr.weather.ui.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
@@ -23,6 +25,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = viewMode
     Scaffold { padding ->
         Column(
                 modifier = Modifier
+                    .verticalScroll(rememberScrollState())
                     .padding(padding)
                     .padding(16.dp)
                     .fillMaxSize(),

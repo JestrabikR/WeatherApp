@@ -62,7 +62,6 @@ class DetailViewModel(
                         visibility = result.visibility,
 
                         windSpeed = result.wind.speed.roundToInt(),
-                        windGust = result.wind.gust?.roundToInt(),
 
                         sunrise = result.sys.sunrise,
                         sunset = result.sys.sunset

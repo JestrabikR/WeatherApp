@@ -24,7 +24,6 @@ data class MainDto(
 
 data class WindDto(
     val speed: Double,
-    val gust: Double?
 )
 
 data class SunDto(

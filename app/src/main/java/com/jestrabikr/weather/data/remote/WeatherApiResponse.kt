@@ -31,8 +31,7 @@ data class WeatherDescription(
 )
 
 data class Wind(
-    val speed: Double,
-    val gust: Double?
+    val speed: Double
 )
 
 data class Sys(

@@ -25,7 +25,6 @@ fun WeatherApiResponse.toDto(): WeatherDto =
         visibility = visibility,
         wind = WindDto(
             speed = wind.speed,
-            gust = wind.gust
         ),
         sys = SunDto(
             sunrise = sys.sunrise,
