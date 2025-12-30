@@ -63,8 +63,8 @@ class DetailViewModel(
 
                         windSpeed = result.wind.speed.roundToInt(),
 
-                        sunrise = result.sys.sunrise,
-                        sunset = result.sys.sunset
+                        sunrise = result.sys.sunrise + result.timezone,
+                        sunset = result.sys.sunset + result.timezone
                     )
                 }
             } catch (e: Exception) {

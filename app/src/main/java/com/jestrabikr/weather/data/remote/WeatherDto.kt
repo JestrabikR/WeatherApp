@@ -6,6 +6,7 @@ data class WeatherDto(
     val visibility: Int,
     val wind: WindDto,
     val sys: SunDto,
+    val timezone: Int,
 )
 
 data class WeatherDescriptionDto(

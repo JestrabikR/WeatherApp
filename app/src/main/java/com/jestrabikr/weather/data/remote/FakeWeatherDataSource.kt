@@ -4,6 +4,7 @@ class FakeWeatherDataSource : WeatherDataSource {
     val fakeResponse = WeatherDto(
         name = "Brno",
         visibility = 10000,
+        timezone = 3600,
 
         weather = WeatherDescriptionDto(
             main = "Clouds",

@@ -115,7 +115,7 @@ class HomeViewModel(
                     it.copy(
                         name = result.name,
                         isLoading = false,
-                        temperature = result.main.temperature.roundToInt().toDouble(),
+                        temperature = result.main.temperature.roundToInt(),
                         description = result.weather.main,
                         weatherIcon = result.weather.icon
                     )

@@ -15,6 +15,7 @@ fun WeatherApiResponse.toDto(): WeatherDto =
             description =  weather.firstOrNull()?.description ?: "",
             icon =  weather.firstOrNull()?.icon
         ),
+        timezone = timezone,
         main = MainDto(
             temperature = main.temp,
             feelsLike = main.feelsLike,
